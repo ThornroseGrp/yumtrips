@@ -135,9 +135,12 @@ yumtrips/
 ## 🌐 Routes
 
 - `/` - Beautiful landing page with all trips
-- `/oki25` - Beach 'n Boil Outer Banks trip
-- `/charleston25` - Charleston to Oak Island trip
-- `/[tripId]` - Any future trip
+- `/oki25` - Beach 'n Boil home page
+- `/oki25/itinerary` - Beach 'n Boil daily itinerary
+- `/charleston25` - Charleston trip home page  
+- `/charleston25/itinerary` - Charleston daily itinerary
+- `/[tripId]` - Any future trip home page
+- `/[tripId]/itinerary` - Any future trip itinerary
 
 ## 📸 Photo Guidelines
 
@@ -167,6 +170,12 @@ yumtrips/
 - Improved photo organization (oki25/ and charleston25/ folders)
 - Updated manifest.json for Yumtrips branding
 - Maintained all existing features (voting, weather, timeline)
+
+## 💙 GitHub Repository
+
+The project is now available on GitHub:
+- **Repository**: [https://github.com/shawnsninja/yumtrips](https://github.com/shawnsninja/yumtrips)
+- **Clone**: `git clone https://github.com/shawnsninja/yumtrips.git`
 
 ## 🚀 Deployment
 
