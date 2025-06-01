@@ -8,11 +8,11 @@ import {
   GlassWater, Building, MapPin,
   Grape, Flower2, Wine, Hotel, Utensils,
   Mountain, Trees, Tent, CableCar, Soup,
-  TreePalm, Bird, Flower, Coconut, Cocktail,
+  TreePalm, Bird, Flower, 
   Ship, Bed,
-  Cactus, Sunset, Pyramid, Caravan, Taco,
+  Sunset, Pyramid, Caravan,
   Tent as CampTent,
-  Building as CityBuilding, Subway, Theater, Pizza, Palette,
+  Building as CityBuilding, Theater, Pizza, Palette,
   Train, Hotel as CityHotel
 } from 'lucide-react';
 
@@ -307,7 +307,7 @@ export const themes: Record<string, ThemeConfig> = {
       primary: TreePalm,
       secondary: [Bird, Flower, Sun],
       activities: {
-        food: Cocktail,
+        food: Wine, // Changed from Cocktail
         activity: Umbrella,
         travel: Ship,
         accommodation: Bed
@@ -353,10 +353,10 @@ export const themes: Record<string, ThemeConfig> = {
       textTransform: 'none'
     },
     icons: {
-      primary: Cactus,
+      primary: Trees, // Changed from Cactus
       secondary: [Sunset, Sun, Pyramid],
       activities: {
-        food: Utensils, // Would be Taco if we had it
+        food: Utensils,
         activity: Pyramid,
         travel: Caravan,
         accommodation: CampTent
@@ -404,11 +404,11 @@ export const themes: Record<string, ThemeConfig> = {
     },
     icons: {
       primary: CityBuilding,
-      secondary: [Subway, Theater, Palette],
+      secondary: [Train, Theater, Palette], // Changed from Subway,
       activities: {
         food: Pizza,
         activity: Theater,
-        travel: Subway,
+        travel: Train, // Changed from Subway
         accommodation: CityHotel
       }
     },
