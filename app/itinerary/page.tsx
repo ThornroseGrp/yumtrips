@@ -137,7 +137,6 @@ function ItineraryContent() {
                   isFirst={index === 0}
                   isLast={index === activities.length - 1}
                   currentDate={currentDay.date}
-                  tripId={tripId}
                 />
               ))}
             </div>
@@ -149,7 +148,6 @@ function ItineraryContent() {
                   activity={activity} 
                   isTimelineView={false}
                   currentDate={currentDay.date}
-                  tripId={tripId}
                 />
               ))}
             </div>
