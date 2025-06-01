@@ -33,7 +33,7 @@ export default function TripItineraryPage() {
     setTrip(tripData);
     
     // Update theme colors based on trip
-    if (tripData) {
+    if (tripData && tripData.theme) {
       document.documentElement.style.setProperty('--trip-primary', tripData.theme.primary);
       document.documentElement.style.setProperty('--trip-secondary', tripData.theme.secondary);
       document.documentElement.style.setProperty('--trip-accent', tripData.theme.accent);
