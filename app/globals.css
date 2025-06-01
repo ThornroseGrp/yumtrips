@@ -7,14 +7,24 @@
 
 @layer base {
   html {
-    @apply scroll-smooth overflow-x-hidden;
-    height: 100%;
+    @apply scroll-smooth;
+    height: 100vh;
+    overflow: hidden;
   }
   
   body {
-    @apply antialiased overflow-x-hidden;
-    min-height: 100%;
-    position: relative;
+    @apply antialiased;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+  }
+  
+  /* Main app container that handles scrolling */
+  #__next {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
   }
 }
 

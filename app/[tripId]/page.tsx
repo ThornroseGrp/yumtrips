@@ -112,13 +112,21 @@ export default function TripHomePage() {
             {trip.icon}
           </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-4">
-            <span className={`bg-gradient-to-r ${
-              tripId === 'oki25'
-                ? 'from-cyan-500 to-blue-600'
-                : 'from-violet-600 to-rose-500'
-            } bg-clip-text text-transparent`}>
-              {trip.name}
-            </span>
+            {tripId === 'oki25' ? (
+              <>
+                <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
+                  Beach
+                </span>
+                <span className="text-gray-800 dark:text-gray-100"> 'n </span>
+                <span className="bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent">
+                  Boil
+                </span>
+              </>
+            ) : (
+              <span className={`bg-gradient-to-r from-violet-600 to-rose-500 bg-clip-text text-transparent`}>
+                {trip.name}
+              </span>
+            )}
           </h1>
           <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-200 mb-2">
             {trip.description}
@@ -173,10 +181,10 @@ export default function TripHomePage() {
           </div>
           <div className="p-6 text-center">
             <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-50 mb-2">
-              {trip.name}
+              {tripId === 'oki25' ? 'Three Generations of Beach Adventures' : trip.name}
             </h3>
             <p className="text-gray-600 dark:text-gray-200">
-              {trip.description}
+              {tripId === 'oki25' ? 'Sun, sand, and seafood boil memories' : trip.description}
             </p>
           </div>
         </div>
