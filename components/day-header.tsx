@@ -72,16 +72,16 @@ export function DayHeader({ day, tripId }: DayHeaderProps) {
   const getThemeConfig = () => {
     if (tripId === 'charleston25') {
       return {
-        headerGradient: "bg-gradient-to-r from-violet-500 via-rose-500 to-rose-600 dark:from-violet-700 dark:via-rose-700 dark:to-rose-800",
-        borderColor: "border-violet-100 dark:border-violet-900",
-        shadowColor: "dark:shadow-violet-500/20",
-        weatherBg: "bg-gradient-to-r from-violet-50 to-rose-50 dark:from-violet-950/50 dark:to-rose-950/50",
-        summaryBg: "bg-gradient-to-r from-rose-50 to-pink-50 dark:from-violet-950/30 dark:to-rose-950/30",
-        summaryBorder: "border-rose-100 dark:border-violet-900",
+        headerGradient: "charleston-header-gradient",
+        borderColor: "border-violet-200 dark:border-violet-900",
+        shadowColor: "charleston-shadow",
+        weatherBg: "bg-gradient-to-r from-violet-100 to-rose-100 dark:from-violet-950/50 dark:to-rose-950/50 tree-canopy",
+        summaryBg: "bg-gradient-to-r from-rose-100 to-pink-100 dark:from-violet-950/30 dark:to-rose-950/30 cobblestone-texture",
+        summaryBorder: "border-rose-200 dark:border-violet-900",
         attendeeBg: "bg-gradient-to-r from-violet-100 to-rose-100 dark:from-violet-900/50 dark:to-rose-900/50",
         accentColor: "text-violet-600 dark:text-violet-400",
-        bulletIcon: tripId === 'charleston25' ? "🌳" : "🌊",
-        bgMain: "bg-white dark:bg-violet-950/50",
+        bulletIcon: "🌳",
+        bgMain: "bg-white dark:bg-violet-950/50 carriage-border",
         weatherBorder: "border-violet-200 dark:border-violet-900",
         hasGhostAccent: true
       };

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import theme system styles */
+@import './theme-styles.css';
+
 @layer base {
   body {
     @apply antialiased;
@@ -109,18 +112,21 @@
 /* Charleston Trip Specific Styles */
 @layer base {
   :root {
-    /* Rainbow Row inspired colors */
-    --charleston-pink: 236 72 153; /* pink-500 */
+    /* Rainbow Row inspired colors - Pastel Charleston palette */
+    --charleston-pink: 244 114 182; /* pink-400 */
     --charleston-blue: 147 197 253; /* blue-300 */
     --charleston-yellow: 254 240 138; /* yellow-200 */
-    --charleston-coral: 251 146 60; /* orange-400 */
+    --charleston-coral: 251 207 232; /* pink-200 */
     --charleston-mint: 167 243 208; /* emerald-200 */
-    --charleston-violet: 167 139 250; /* violet-400 */
+    --charleston-violet: 196 181 253; /* violet-300 */
+    --charleston-pastel-purple: 233 213 255; /* violet-200 */
+    --charleston-pastel-rose: 251 207 232; /* rose-200 */
+    --charleston-pastel-blue: 191 219 254; /* blue-200 */
   }
   
   [data-trip="charleston25"] {
     --color-primary: var(--charleston-violet);
-    --color-secondary: var(--charleston-pink);
+    --color-secondary: var(--charleston-pastel-rose);
     --color-accent: var(--charleston-mint);
   }
 }
@@ -130,12 +136,12 @@
   .rainbow-row-gradient {
     background: linear-gradient(
       to right,
-      rgb(var(--charleston-pink)),
-      rgb(var(--charleston-blue)),
+      rgb(var(--charleston-pastel-purple)),
+      rgb(var(--charleston-pastel-rose)),
       rgb(var(--charleston-yellow)),
       rgb(var(--charleston-coral)),
       rgb(var(--charleston-mint)),
-      rgb(var(--charleston-violet))
+      rgb(var(--charleston-pastel-blue))
     );
     background-size: 300% 100%;
     animation: rainbow-shift 10s ease infinite;
@@ -145,9 +151,70 @@
     box-shadow: 0 4px 6px -1px rgba(var(--charleston-violet), 0.1),
                 0 2px 4px -2px rgba(var(--charleston-pink), 0.1);
   }
+  
+  /* Cobblestone texture effect */
+  .cobblestone-texture {
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(var(--charleston-violet), 0.03) 10px,
+        rgba(var(--charleston-violet), 0.03) 20px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        rgba(var(--charleston-pastel-rose), 0.03) 10px,
+        rgba(var(--charleston-pastel-rose), 0.03) 20px
+      );
+  }
+  
+  /* Horse carriage decoration */
+  .carriage-border {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .carriage-border::before {
+    content: '🐴';
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.1;
+    animation: trot 20s linear infinite;
+  }
+  
+  /* Tree canopy effect */
+  .tree-canopy {
+    background-image: 
+      radial-gradient(ellipse at top, rgba(var(--charleston-mint), 0.1) 0%, transparent 70%);
+  }
+  
+  /* Pastel gradient for headers */
+  .charleston-header-gradient {
+    background: linear-gradient(
+      135deg,
+      rgb(var(--charleston-pastel-purple)),
+      rgb(var(--charleston-pastel-rose)),
+      rgb(var(--charleston-violet))
+    );
+  }
+  
+  /* Seafood accent */
+  .seafood-accent::after {
+    content: '🦐';
+    margin-left: 4px;
+    opacity: 0.7;
+  }
 }
 
 @keyframes rainbow-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+@keyframes trot {
+  from { left: -50px; }
+  to { left: 100%; }
 }

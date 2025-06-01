@@ -37,6 +37,29 @@ Yumtrips is a custom-built Progressive Web App platform designed for creating be
 - Purple and pink theme with amber accents
 - Path: `trips.yumrovia.com/charleston25`
 
+## 🎨 Theme System
+
+Yumtrips features a comprehensive theme system that transforms the entire visual experience based on destination type:
+
+### Available Themes
+- **🌊 Ocean**: Beach destinations with waves, sand textures, and polaroid photos
+- **🏛️ Charleston**: Historic cities with pastel colors, cobblestone textures, and vintage frames
+- **🌻 Tuscany**: Wine country with warm colors, rustic borders, and gentle animations
+- **🏔️ Alpine**: Mountain adventures with emerald tones, wood textures, and snow effects
+- **🌴 Tropical**: Island paradises with vibrant colors, palm animations, and bamboo textures
+- **🌵 Desert**: Southwest trips with warm gradients, adobe textures, and heat shimmer
+- **🏙️ Urban**: City breaks with neon effects, concrete textures, and modern styling
+
+### Theme Features
+- Dynamic color schemes and gradients
+- Destination-specific icons and emojis
+- Custom animations and visual effects
+- Themed photo frames and filters
+- Texture overlays and patterns
+- Interactive hover and click effects
+
+See [THEME-SYSTEM.md](./THEME-SYSTEM.md) for complete documentation.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -164,9 +187,37 @@ yumtrips/
 - Features haunted jail tour, raw bars, and fried chicken
 - 47 Charleston-specific photos organized
 
+### Charleston Design Update (Latest)
+- **Pastel Color Scheme**: Soft violet and rose gradients inspired by Rainbow Row
+- **Charleston-Specific Elements**: 
+  - Cobblestone texture patterns on summary cards
+  - Tree canopy effects on weather widgets
+  - Horse carriage animations
+  - Seafood accent on menu highlights
+- **Updated Components**:
+  - Activity cards with violet/rose theme
+  - Voting section shows only 3 attendees for Charleston days
+  - Map links and highlights use trip-specific colors
+  - Notes sections have cobblestone texture
+- **Visual Consistency**: All Charleston pages now use consistent pastel palette
+
+### New Theme System Implementation
+- **Comprehensive Theming**: Complete visual transformation based on destination type
+- **7 Pre-built Themes**: Ocean, Charleston, Tuscany, Alpine, Tropical, Desert, Urban
+- **Theme Elements**:
+  - Dynamic color systems with primary, secondary, and accent colors
+  - Typography options (serif, sans-serif, decorative fonts)
+  - Destination-specific icons and activity emojis
+  - Visual effects (animations, textures, patterns, shadows)
+  - Photo display styles (polaroid, vintage, rustic, modern frames)
+  - Interactive elements (hover effects, transitions)
+  - Decorative elements (dividers, backgrounds, weather widgets)
+- **Easy Integration**: Trips reference themes by ID, components auto-adapt
+- **Extensible**: Easy to create custom themes for new destination types
+
 ### Technical Improvements
 - Dynamic itinerary loading based on trip ID
-- Trip-specific theming system
+- Trip-specific theming system with conditional styling
 - Improved photo organization (oki25/ and charleston25/ folders)
 - Updated manifest.json for Yumtrips branding
 - Maintained all existing features (voting, weather, timeline)

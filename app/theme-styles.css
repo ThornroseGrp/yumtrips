@@ -1,0 +1,442 @@
+/* Theme System CSS - Yumtrips */
+/* This file contains all the visual effects, textures, and animations for each theme */
+
+/* ===== SHARED UTILITIES ===== */
+@layer utilities {
+  /* Photo Frame Styles */
+  .polaroid-frame {
+    @apply p-2 bg-white dark:bg-gray-100 shadow-lg;
+    padding-bottom: 3rem;
+  }
+  
+  .vintage-frame {
+    @apply p-3 bg-gradient-to-br from-amber-100 to-amber-50 dark:from-amber-900/20 dark:to-amber-800/20;
+    border: 2px solid theme('colors.amber.200');
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+  }
+  
+  .rustic-frame {
+    @apply p-2 bg-gradient-to-br from-stone-200 to-stone-100 dark:from-stone-900/30 dark:to-stone-800/30;
+    border: 3px solid theme('colors.amber.700');
+    border-radius: 2px;
+  }
+  
+  .modern-frame {
+    @apply border-2 border-gray-300 dark:border-gray-700;
+  }
+  
+  .ornate-frame {
+    @apply p-4;
+    border: 8px solid transparent;
+    background: 
+      linear-gradient(white, white) padding-box,
+      linear-gradient(45deg, gold, silver, gold) border-box;
+  }
+}
+
+/* ===== OCEAN THEME ===== */
+@layer utilities {
+  /* Textures */
+  .sand-texture {
+    background-image: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(251, 191, 36, 0.03) 2px,
+        rgba(251, 191, 36, 0.03) 4px
+      );
+  }
+  
+  /* Animations */
+  @keyframes wave {
+    0% { transform: translateX(-100%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-5px); }
+    100% { transform: translateX(0%) translateY(0); }
+  }
+  
+  .wave-animation {
+    animation: wave 4s ease-in-out infinite;
+  }
+  
+  /* Borders */
+  .wave-border {
+    position: relative;
+  }
+  
+  .wave-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0,10 Q25,0 50,10 T100,10 L100,20 L0,20 Z' fill='%2306b6d4'/%3E%3C/svg%3E");
+    background-size: 100px 20px;
+    animation: wave 4s linear infinite;
+  }
+  
+  /* Shadows */
+  .ocean-shadow {
+    box-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.1),
+                0 2px 4px -2px rgba(59, 130, 246, 0.1);
+  }
+  
+  /* Weather Widget */
+  .beach-weather {
+    @apply bg-gradient-to-br from-sky-100 to-cyan-100 dark:from-sky-900/20 dark:to-cyan-900/20;
+  }
+}
+
+/* ===== CHARLESTON THEME (Already defined) ===== */
+/* Keeping existing Charleston styles from globals.css */
+
+/* ===== TUSCANY THEME ===== */
+@layer utilities {
+  /* Textures */
+  .tuscan-plaster {
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(217, 119, 6, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(180, 83, 9, 0.05) 0%, transparent 50%);
+    background-size: 200px 200px;
+  }
+  
+  .vineyard-rows {
+    background-image: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 20px,
+        rgba(34, 197, 94, 0.03) 20px,
+        rgba(34, 197, 94, 0.03) 22px
+      );
+  }
+  
+  /* Animations */
+  @keyframes gentle-sway {
+    0%, 100% { transform: rotate(-1deg); }
+    50% { transform: rotate(1deg); }
+  }
+  
+  .gentle-sway {
+    animation: gentle-sway 6s ease-in-out infinite;
+  }
+  
+  /* Borders */
+  .rustic-border {
+    border: 2px solid theme('colors.amber.700');
+    border-radius: 0;
+    position: relative;
+  }
+  
+  .rustic-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, transparent 30%, rgba(217, 119, 6, 0.1) 50%, transparent 70%);
+  }
+  
+  /* Shadows */
+  .warm-shadow {
+    box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.2),
+                0 2px 4px -2px rgba(180, 83, 9, 0.2);
+  }
+  
+  /* Dividers */
+  .grape-vine {
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'%3E%3Cpath d='M10,15 Q20,5 30,15 T50,15 Q60,5 70,15 T90,15' stroke='%2384cc16' fill='none' stroke-width='2'/%3E%3Ccircle cx='25' cy='20' r='3' fill='%239333ea'/%3E%3Ccircle cx='50' cy='10' r='3' fill='%239333ea'/%3E%3Ccircle cx='75' cy='20' r='3' fill='%239333ea'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+  }
+  
+  /* Weather */
+  .vineyard-weather {
+    @apply bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20;
+  }
+}
+
+/* ===== ALPINE THEME ===== */
+@layer utilities {
+  /* Textures */
+  .wood-grain {
+    background-image: 
+      linear-gradient(90deg, rgba(92, 45, 26, 0.1) 0%, transparent 30%, rgba(92, 45, 26, 0.1) 100%),
+      linear-gradient(180deg, transparent 0%, rgba(120, 53, 15, 0.05) 50%, transparent 100%);
+    background-size: 20px 100%, 100% 200px;
+  }
+  
+  .mountain-mist {
+    background-image: 
+      radial-gradient(ellipse at top, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  }
+  
+  /* Animations */
+  @keyframes snow-fall {
+    0% { transform: translateY(-100vh) translateX(0); }
+    100% { transform: translateY(100vh) translateX(20px); }
+  }
+  
+  @keyframes pine-sway {
+    0%, 100% { transform: skewX(-2deg); }
+    50% { transform: skewX(2deg); }
+  }
+  
+  .snow-fall::before {
+    content: '❄️';
+    position: absolute;
+    animation: snow-fall 10s linear infinite;
+  }
+  
+  /* Borders */
+  .timber-border {
+    border: 4px solid theme('colors.amber.800');
+    border-radius: 0;
+    box-shadow: inset 0 0 0 1px theme('colors.amber.600');
+  }
+  
+  /* Shadows */
+  .mountain-shadow {
+    box-shadow: 0 10px 15px -3px rgba(71, 85, 105, 0.3),
+                0 4px 6px -4px rgba(71, 85, 105, 0.3);
+  }
+  
+  /* Weather */
+  .alpine-weather {
+    @apply bg-gradient-to-br from-emerald-50 to-slate-50 dark:from-emerald-950/20 dark:to-slate-950/20;
+  }
+}
+
+/* ===== TROPICAL THEME ===== */
+@layer utilities {
+  /* Textures */
+  .bamboo {
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        rgba(132, 204, 22, 0.1),
+        rgba(132, 204, 22, 0.1) 10px,
+        transparent 10px,
+        transparent 20px
+      );
+  }
+  
+  .tropical-leaves {
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(52, 211, 153, 0.1) 0%, transparent 50%);
+  }
+  
+  /* Animations */
+  @keyframes palm-sway {
+    0%, 100% { transform: rotate(-5deg) translateX(0); }
+    50% { transform: rotate(5deg) translateX(10px); }
+  }
+  
+  @keyframes tropical-breeze {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+  }
+  
+  /* Borders */
+  .bamboo-border {
+    border: 3px solid theme('colors.lime.600');
+    border-radius: 1rem;
+    position: relative;
+  }
+  
+  .bamboo-border::before,
+  .bamboo-border::after {
+    content: '';
+    position: absolute;
+    background: theme('colors.lime.600');
+    width: 3px;
+    height: 100%;
+  }
+  
+  .bamboo-border::before { left: 30%; }
+  .bamboo-border::after { right: 30%; }
+  
+  /* Shadows */
+  .tropical-shadow {
+    box-shadow: 0 4px 6px -1px rgba(132, 204, 22, 0.2),
+                0 2px 4px -2px rgba(236, 72, 153, 0.2);
+  }
+  
+  /* Weather */
+  .tropical-weather {
+    @apply bg-gradient-to-br from-lime-100 to-emerald-100 dark:from-lime-950/20 dark:to-emerald-950/20;
+  }
+}
+
+/* ===== DESERT THEME ===== */
+@layer utilities {
+  /* Textures */
+  .sand-dunes {
+    background-image: 
+      radial-gradient(ellipse at bottom, rgba(251, 146, 60, 0.1) 0%, transparent 70%);
+    background-size: 200% 100%;
+  }
+  
+  .adobe-wall {
+    background-image: 
+      linear-gradient(180deg, rgba(194, 65, 12, 0.05) 0%, rgba(251, 146, 60, 0.05) 100%);
+  }
+  
+  /* Animations */
+  @keyframes heat-shimmer {
+    0%, 100% { transform: translateY(0) scaleY(1); }
+    50% { transform: translateY(-2px) scaleY(0.98); }
+  }
+  
+  @keyframes tumble-weed {
+    0% { transform: translateX(-100vw) rotate(0deg); }
+    100% { transform: translateX(100vw) rotate(720deg); }
+  }
+  
+  /* Borders */
+  .pueblo-border {
+    border: 3px solid theme('colors.orange.700');
+    border-radius: 0.25rem;
+    position: relative;
+  }
+  
+  .pueblo-border::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: repeating-linear-gradient(
+      45deg,
+      theme('colors.orange.700'),
+      theme('colors.orange.700') 10px,
+      theme('colors.red.700') 10px,
+      theme('colors.red.700') 20px
+    );
+    z-index: -1;
+  }
+  
+  /* Shadows */
+  .desert-shadow {
+    box-shadow: 0 4px 6px -1px rgba(251, 146, 60, 0.3),
+                0 10px 15px -3px rgba(239, 68, 68, 0.2);
+  }
+  
+  /* Weather */
+  .desert-weather {
+    @apply bg-gradient-to-br from-orange-100 to-red-50 dark:from-orange-950/20 dark:to-red-950/20;
+  }
+}
+
+/* ===== URBAN THEME ===== */
+@layer utilities {
+  /* Textures */
+  .concrete {
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 35px,
+        rgba(113, 113, 122, 0.03) 35px,
+        rgba(113, 113, 122, 0.03) 70px
+      );
+  }
+  
+  .brick-wall {
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        rgba(239, 68, 68, 0.05) 0px,
+        rgba(239, 68, 68, 0.05) 10px,
+        transparent 10px,
+        transparent 20px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(239, 68, 68, 0.05) 0px,
+        rgba(239, 68, 68, 0.05) 20px,
+        transparent 20px,
+        transparent 40px
+      );
+  }
+  
+  /* Animations */
+  @keyframes neon-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+  
+  @keyframes city-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  
+  /* Borders */
+  .industrial-border {
+    border: 2px solid theme('colors.zinc.600');
+    position: relative;
+  }
+  
+  .industrial-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(90deg, transparent 48%, theme('colors.yellow.400') 50%, transparent 52%);
+    background-size: 20px 100%;
+  }
+  
+  /* Shadows */
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5),
+                0 0 40px rgba(168, 85, 247, 0.3),
+                0 0 60px rgba(168, 85, 247, 0.1);
+  }
+  
+  /* Weather */
+  .urban-weather {
+    @apply bg-gradient-to-br from-zinc-200 to-slate-200 dark:from-zinc-800 dark:to-slate-800;
+  }
+}
+
+/* ===== DIVIDER STYLES ===== */
+@layer utilities {
+  .wave-divider {
+    height: 20px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0,10 Q25,0 50,10 T100,10' stroke='%2306b6d4' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+  }
+  
+  .wrought-iron {
+    height: 30px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'%3E%3Cpath d='M0,15 Q10,5 20,15 Q30,25 40,15 Q50,5 60,15 Q70,25 80,15 Q90,5 100,15' stroke='%23000' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    opacity: 0.3;
+  }
+  
+  .pine-branch {
+    height: 40px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40'%3E%3Cpath d='M0,20 L20,10 L20,30 Z' fill='%2310b981'/%3E%3Cpath d='M30,20 L50,10 L50,30 Z' fill='%2310b981'/%3E%3Cpath d='M60,20 L80,10 L80,30 Z' fill='%2310b981'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+  }
+  
+  .tropical-flowers {
+    height: 30px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'%3E%3Ccircle cx='25' cy='15' r='8' fill='%23ec4899' opacity='0.5'/%3E%3Ccircle cx='50' cy='15' r='8' fill='%23f59e0b' opacity='0.5'/%3E%3Ccircle cx='75' cy='15' r='8' fill='%2310b981' opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+  }
+  
+  .desert-pattern {
+    height: 30px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'%3E%3Cpath d='M20,30 L25,10 L30,30' fill='%2322c55e'/%3E%3Cpath d='M50,30 L55,10 L60,30' fill='%2322c55e'/%3E%3Cpath d='M80,30 L85,10 L90,30' fill='%2322c55e'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+  }
+  
+  .subway-line {
+    height: 10px;
+    background: repeating-linear-gradient(
+      90deg,
+      theme('colors.zinc.800'),
+      theme('colors.zinc.800') 20px,
+      theme('colors.yellow.400') 20px,
+      theme('colors.yellow.400') 25px
+    );
+  }
+}

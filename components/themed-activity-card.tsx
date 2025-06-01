@@ -8,10 +8,6 @@ import { VotingSection } from "./voting-section";
 import { 
   Clock, 
   MapPin, 
-  Utensils, 
-  Activity as ActivityIcon,
-  Car,
-  Home,
   ChevronDown,
   ChevronUp,
   Circle,
@@ -22,7 +18,7 @@ import {
 import { useState, useEffect, memo } from "react";
 import { format, parseISO, isWithinInterval, addMinutes, subMinutes } from "date-fns";
 
-interface ActivityCardProps {
+interface ThemedActivityCardProps {
   activity: Activity;
   isTimelineView?: boolean;
   isFirst?: boolean;
@@ -30,14 +26,14 @@ interface ActivityCardProps {
   currentDate: string;
 }
 
-export const ActivityCard = memo(function ActivityCard({ 
+export const ThemedActivityCard = memo(function ThemedActivityCard({ 
   activity, 
   isTimelineView = false, 
   isFirst = false, 
   isLast = false,
   currentDate 
-}: ActivityCardProps) {
-  const { currentActivity, tripId } = useItinerary();
+}: ThemedActivityCardProps) {
+  const { currentActivity, theme } = useItinerary();
   const [isExpanded, setIsExpanded] = useState(!isTimelineView);
   const [isMenuExpanded, setIsMenuExpanded] = useState(false);
   const [timeStatus, setTimeStatus] = useState<'past' | 'current' | 'upcoming' | 'soon' | 'future'>('future');
@@ -87,19 +83,36 @@ export const ActivityCard = memo(function ActivityCard({
   const isSoon = timeStatus === 'soon';
   const isCurrent = timeStatus === 'current';
   
+  // Get activity icon from theme
   const getActivityIcon = () => {
-    const iconClass = "w-4 h-4";
-    switch (activity.type) {
-      case "food":
-        return <Utensils className={iconClass} />;
-      case "activity":
-        return <ActivityIcon className={iconClass} />;
-      case "travel":
-        return <Car className={iconClass} />;
-      case "accommodation":
-        return <Home className={iconClass} />;
-    }
+    if (!theme) return null;
+    const iconEmoji = theme.icons.activities[activity.type];
+    return <span className="text-base">{iconEmoji}</span>;
   };
+
+  // Get theme-specific styles
+  const getThemeStyles = () => {
+    if (!theme) {
+      // Fallback styles
+      return {
+        cardBg: "bg-white dark:bg-gray-900",
+        cardBorder: "border-gray-100 dark:border-gray-800",
+        primaryColor: "cyan",
+        secondaryColor: "blue",
+        accentColor: "orange"
+      };
+    }
+
+    return {
+      cardBg: `bg-white dark:bg-gray-900 ${theme.effects.textures?.join(' ')}`,
+      cardBorder: theme.effects.borders || "border-gray-100 dark:border-gray-800",
+      primaryColor: theme.colors.primary,
+      secondaryColor: theme.colors.secondary,
+      accentColor: theme.colors.accent
+    };
+  };
+
+  const styles = getThemeStyles();
 
   if (isTimelineView) {
     return (
@@ -108,9 +121,10 @@ export const ActivityCard = memo(function ActivityCard({
         <div className="flex flex-col items-center">
           <div className={cn(
             "w-3 h-3 rounded-full transition-all",
-            isCurrent ? "bg-cyan-500 ring-4 ring-cyan-100 animate-pulse" :
-            isSoon ? "bg-orange-500 ring-4 ring-orange-100 animate-pulse" : 
-            isPast ? "bg-green-500" : "bg-gray-300"
+            isCurrent && "bg-cyan-500 ring-4 ring-cyan-100 animate-pulse",
+            isSoon && "bg-orange-500 ring-4 ring-orange-100 animate-pulse",
+            isPast && "bg-green-500",
+            !isCurrent && !isSoon && !isPast && "bg-gray-300"
           )} />
           {!isLast && (
             <div className={cn(
@@ -123,11 +137,11 @@ export const ActivityCard = memo(function ActivityCard({
         {/* Compact Card */}
         <div 
           className={cn(
-            "flex-1 rounded-lg p-4 shadow-sm cursor-pointer transition-all hover:shadow-md",
-            tripId === 'charleston25' ? "bg-white dark:bg-violet-950/50" : "bg-white dark:bg-ocean-night-100",
-            isCurrent && (tripId === 'charleston25' ? "ring-2 ring-violet-500" : "ring-2 ring-cyan-500"),
-            isSoon && "ring-2 ring-orange-500",
-            "mb-4"
+            "flex-1 rounded-lg p-4 shadow-sm cursor-pointer transition-all hover:shadow-md mb-4",
+            styles.cardBg,
+            theme?.effects.shadows,
+            isCurrent && "ring-2 ring-cyan-500",
+            isSoon && "ring-2 ring-orange-500"
           )}
           onClick={() => setIsExpanded(!isExpanded)}
         >
@@ -158,16 +172,13 @@ export const ActivityCard = memo(function ActivityCard({
             <div className="mt-4 space-y-3" onClick={(e) => e.stopPropagation()}>
               <p className="text-sm text-gray-600 dark:text-gray-300">{activity.description}</p>
               
-              {/* Map Link in Timeline View */}
+              {/* Map Link */}
               {activity.mapUrl && (
                 <a
                   href={activity.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={cn(
-                    "inline-flex items-center gap-2 text-sm",
-                    tripId === 'charleston25' ? "text-violet-600 hover:text-violet-700" : "text-cyan-600 hover:text-cyan-700"
-                  )}
+                  className="inline-flex items-center gap-2 text-sm text-cyan-600 hover:text-cyan-700"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <MapPin className="w-4 h-4" />
@@ -175,43 +186,17 @@ export const ActivityCard = memo(function ActivityCard({
                 </a>
               )}
               
-              {/* Photos with click protection */}
+              {/* Photos with theme styling */}
               {activity.photos && activity.photos.length > 0 && (
-                <div onClick={(e) => e.stopPropagation()}>
+                <div 
+                  onClick={(e) => e.stopPropagation()} 
+                  className={theme?.photoStyle.frame && `${theme.photoStyle.frame}-frame`}
+                >
                   <PhotoCarousel
                     photos={activity.photos}
                     alt={activity.title}
                     size="small"
                   />
-                </div>
-              )}
-              
-              {/* Menu Highlights - Collapsible */}
-              {activity.options && activity.options.length > 0 && (
-                <div className="mt-3">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsMenuExpanded(!isMenuExpanded);
-                    }}
-                    className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100"
-                  >
-                    <span>Menu Highlights</span>
-                    <ChevronDown className={cn(
-                      "w-3 h-3 transition-transform",
-                      isMenuExpanded && "rotate-180"
-                    )} />
-                  </button>
-                  {isMenuExpanded && (
-                    <div className="mt-2 p-3 bg-gray-50 dark:bg-ocean-night-200 rounded-lg text-sm space-y-1">
-                      {activity.options.map((option, index) => (
-                        <div key={option.id}>
-                          <span className="font-medium dark:text-gray-100">{option.title}:</span>{" "}
-                          <span className="text-gray-600 dark:text-gray-300">{option.description}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
                 </div>
               )}
               
@@ -226,21 +211,12 @@ export const ActivityCard = memo(function ActivityCard({
   return (
     <div className={cn(
       "rounded-2xl overflow-hidden transition-all duration-300 border",
-      tripId === 'charleston25' ? (
-        cn(
-          "bg-white dark:bg-violet-950/50 charleston-shadow",
-          isCurrent ? "border-violet-500 shadow-lg ring-2 ring-violet-500" : 
-          isSoon ? "border-orange-500 shadow-lg ring-2 ring-orange-500" : 
-          "border-violet-200 dark:border-violet-900"
-        )
-      ) : (
-        cn(
-          "bg-white dark:bg-ocean-night-100 shadow-sm dark:shadow-xl",
-          isCurrent ? "border-cyan-500 shadow-lg ring-2 ring-cyan-500" : 
-          isSoon ? "border-orange-500 shadow-lg ring-2 ring-orange-500" : 
-          "border-gray-100 dark:border-ocean-900"
-        )
-      ),
+      styles.cardBg,
+      styles.cardBorder,
+      theme?.effects.shadows,
+      theme?.interactive?.transitions,
+      isCurrent && "border-cyan-500 shadow-lg ring-2 ring-cyan-500",
+      isSoon && "border-orange-500 shadow-lg ring-2 ring-orange-500",
       isSoon && "animate-pulse-slow"
     )}>
       {/* Upcoming notification banner */}
@@ -253,7 +229,7 @@ export const ActivityCard = memo(function ActivityCard({
       {isCurrent && (
         <div className={cn(
           "text-white px-4 py-2 text-sm font-medium flex items-center",
-          tripId === 'charleston25' ? "bg-gradient-to-r from-violet-400 to-rose-500" : "bg-gradient-to-r from-cyan-400 to-blue-500"
+          theme?.colors.gradient ? `bg-gradient-to-r ${theme.colors.gradient}` : "bg-gradient-to-r from-cyan-400 to-blue-500"
         )}>
           <AlertCircle className="w-4 h-4 mr-2" />
           Happening now!
@@ -266,17 +242,17 @@ export const ActivityCard = memo(function ActivityCard({
           <div className="flex flex-col items-center">
             <span className={cn(
               "text-lg font-semibold",
-              isPast ? "text-gray-400" : "text-gray-900"
+              isPast ? "text-gray-400" : "text-gray-900 dark:text-gray-100"
             )}>
               {activity.time}
             </span>
             <div className="mt-2">
               <Circle className={cn(
                 "w-4 h-4",
-                isCurrent ? (tripId === 'charleston25' ? "text-violet-500 fill-violet-500 animate-pulse" : "text-cyan-500 fill-cyan-500 animate-pulse") :
-                isSoon ? "text-orange-500 fill-orange-500 animate-pulse" : 
-                isPast ? "text-green-500 fill-green-500" : 
-                "text-gray-300"
+                isCurrent && "text-cyan-500 fill-cyan-500 animate-pulse",
+                isSoon && "text-orange-500 fill-orange-500 animate-pulse",
+                isPast && "text-green-500 fill-green-500",
+                !isCurrent && !isSoon && !isPast && "text-gray-300"
               )} />
             </div>
           </div>
@@ -288,10 +264,10 @@ export const ActivityCard = memo(function ActivityCard({
                 <div className="flex items-center gap-2 mb-1">
                   <span className={cn(
                     "p-1 rounded-lg",
-                    activity.type === "food" ? "bg-orange-100 text-orange-600" :
-                    activity.type === "activity" ? "bg-cyan-100 text-cyan-600" :
-                    activity.type === "travel" ? "bg-blue-100 text-blue-600" :
-                    "bg-green-100 text-green-600"
+                    activity.type === "food" && "bg-orange-100 text-orange-600",
+                    activity.type === "activity" && "bg-cyan-100 text-cyan-600",
+                    activity.type === "travel" && "bg-blue-100 text-blue-600",
+                    activity.type === "accommodation" && "bg-green-100 text-green-600"
                   )}>
                     {getActivityIcon()}
                   </span>
@@ -316,12 +292,7 @@ export const ActivityCard = memo(function ActivityCard({
                   href={activity.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={cn(
-                    "ml-4 p-2 rounded-lg transition-colors",
-                    tripId === 'charleston25' 
-                      ? "bg-violet-50 dark:bg-violet-950/30 text-violet-600 dark:text-violet-400 hover:bg-violet-100 dark:hover:bg-violet-950/50" 
-                      : "bg-cyan-50 dark:bg-ocean-night-200 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-100 dark:hover:bg-ocean-night-300"
-                  )}
+                  className="ml-4 p-2 bg-cyan-50 dark:bg-gray-800 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                   aria-label="Open in maps"
                 >
                   <MapPin className="w-5 h-5" />
@@ -336,9 +307,12 @@ export const ActivityCard = memo(function ActivityCard({
               {activity.description}
             </p>
 
-            {/* Photos */}
+            {/* Photos with theme frame */}
             {activity.photos && activity.photos.length > 0 && (
-              <div className="mt-4">
+              <div className={cn(
+                "mt-4",
+                theme?.photoStyle.frame && `${theme.photoStyle.frame}-frame`
+              )}>
                 <PhotoCarousel
                   photos={activity.photos}
                   alt={activity.title}
@@ -353,12 +327,7 @@ export const ActivityCard = memo(function ActivityCard({
                 {activity.highlights.map((highlight, index) => (
                   <span
                     key={index}
-                    className={cn(
-                      "text-xs px-3 py-1.5 rounded-full font-medium",
-                      tripId === 'charleston25' 
-                        ? "bg-gradient-to-r from-violet-100 to-rose-100 text-violet-700" 
-                        : "bg-gradient-to-r from-cyan-100 to-blue-100 text-cyan-700"
-                    )}
+                    className="text-xs px-3 py-1.5 bg-gradient-to-r from-cyan-100 to-blue-100 text-cyan-700 rounded-full font-medium"
                   >
                     {highlight}
                   </span>
@@ -366,7 +335,7 @@ export const ActivityCard = memo(function ActivityCard({
               </div>
             )}
 
-            {/* Menu Highlights - Collapsible compact box */}
+            {/* Menu Highlights */}
             {activity.options && activity.options.length > 0 && (
               <div className="mt-4">
                 <button
@@ -382,9 +351,8 @@ export const ActivityCard = memo(function ActivityCard({
                 {isMenuExpanded && (
                   <div className={cn(
                     "mt-3 p-4 rounded-xl border",
-                    tripId === 'charleston25'
-                      ? "bg-gradient-to-r from-rose-50 to-pink-50 dark:from-violet-950/30 dark:to-rose-950/30 border-rose-100 dark:border-violet-900 seafood-accent"
-                      : "bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-ocean-night-200 dark:to-ocean-night-200 border-orange-100 dark:border-ocean-900"
+                    "bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-gray-800 dark:to-gray-700",
+                    "border-orange-100 dark:border-gray-600"
                   )}>
                     <div className="space-y-2">
                       {activity.options.map((option) => (
@@ -403,27 +371,17 @@ export const ActivityCard = memo(function ActivityCard({
             {activity.notes && activity.notes.length > 0 && (
               <div className={cn(
                 "mt-4 p-4 rounded-xl",
-                tripId === 'charleston25'
-                  ? "bg-violet-50 dark:bg-violet-950/30 cobblestone-texture"
-                  : "bg-blue-50 dark:bg-ocean-night-200"
+                "bg-blue-50 dark:bg-gray-800",
+                theme?.effects.textures?.join(' ')
               )}>
                 <div className="flex items-start gap-2">
-                  <Info className={cn(
-                    "w-4 h-4 mt-0.5",
-                    tripId === 'charleston25' ? "text-violet-600 dark:text-violet-400" : "text-blue-600 dark:text-blue-400"
-                  )} />
+                  <Info className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5" />
                   <div>
-                    <p className={cn(
-                      "text-xs font-medium mb-1",
-                      tripId === 'charleston25' ? "text-violet-700 dark:text-violet-300" : "text-blue-700 dark:text-blue-300"
-                    )}>GOOD TO KNOW</p>
+                    <p className="text-xs font-medium text-blue-700 dark:text-blue-300 mb-1">GOOD TO KNOW</p>
                     <ul className="space-y-1">
                       {activity.notes.map((note, index) => (
-                        <li key={index} className={cn(
-                          "text-sm",
-                          tripId === 'charleston25' ? "text-violet-800 dark:text-violet-200" : "text-blue-800 dark:text-blue-200"
-                        )}>
-                          {note}
+                        <li key={index} className="text-sm text-blue-800 dark:text-blue-200">
+                          {theme?.icons.bulletPoint} {note}
                         </li>
                       ))}
                     </ul>

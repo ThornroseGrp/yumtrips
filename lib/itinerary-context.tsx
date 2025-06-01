@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { type Day, type Activity } from "./itinerary-data";
 import { isWithinInterval, parseISO, format } from "date-fns";
+import { getTrip } from './trips';
+import { getTheme, type ThemeConfig } from './theme-system';
 
 // Dynamic imports for trip itineraries
 const tripItineraries: Record<string, () => Promise<{ default: Day[] }>> = {
@@ -19,6 +21,7 @@ interface ItineraryContextType {
   getCurrentActivity: () => Activity | null;
   tripId: string;
   isLoading: boolean;
+  theme: ThemeConfig | null;
 }
 
 const ItineraryContext = createContext<ItineraryContextType | undefined>(undefined);
@@ -36,12 +39,24 @@ export function ItineraryProvider({ children, tripId }: { children: React.ReactN
   const [currentActivity, setCurrentActivity] = useState<Activity | null>(null);
   const [itineraryData, setItineraryData] = useState<Day[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [theme, setTheme] = useState<ThemeConfig | null>(null);
 
-  // Load trip-specific itinerary data
+  // Load trip-specific itinerary data and theme
   useEffect(() => {
     const loadItinerary = async () => {
       setIsLoading(true);
       try {
+        // Load trip config and theme
+        const tripConfig = getTrip(tripId);
+        if (tripConfig) {
+          const tripTheme = getTheme(tripConfig.themeId || 'ocean');
+          setTheme(tripTheme);
+          
+          // Apply theme to document
+          document.documentElement.setAttribute('data-theme', tripConfig.themeId || 'ocean');
+        }
+        
+        // Load itinerary
         const loader = tripItineraries[tripId];
         if (loader) {
           const module = await loader();
@@ -111,7 +126,8 @@ export function ItineraryProvider({ children, tripId }: { children: React.ReactN
         setSelectedDayId,
         getCurrentActivity,
         tripId,
-        isLoading
+        isLoading,
+        theme
       }}
     >
       {children}

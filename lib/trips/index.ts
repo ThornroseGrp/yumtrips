@@ -6,14 +6,16 @@ export interface TripConfig {
   description: string;
   dates: string;
   location: string;
-  theme: {
+  themeId: string; // Reference to theme system
+  coverPhoto: string;
+  icon: string;
+  // Legacy theme support (will be deprecated)
+  theme?: {
     primary: string;
     secondary: string;
     accent: string;
     gradient: string;
   };
-  coverPhoto: string;
-  icon: string;
 }
 
 // All available trips
@@ -25,7 +27,8 @@ export const trips: Record<string, TripConfig> = {
     description: "Smith family beach vacation with seafood boil and Nana's memorial",
     dates: "June 6-8, 2025",
     location: "Oak Island, NC",
-    theme: {
+    themeId: 'ocean', // Using new theme system
+    theme: { // Legacy support
       primary: "cyan",
       secondary: "blue", 
       accent: "orange",
@@ -41,7 +44,8 @@ export const trips: Record<string, TripConfig> = {
     description: "Forest cathedrals, raw bars, ghost tours & beach reunion",
     dates: "June 4-6, 2025",
     location: "Mooresville → Charleston → Oak Island",
-    theme: {
+    themeId: 'charleston', // Using new theme system
+    theme: { // Legacy support
       primary: "violet",
       secondary: "rose",
       accent: "teal",
