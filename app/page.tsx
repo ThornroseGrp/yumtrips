@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Calendar, MapPin, Users, ArrowRight, Waves } from 'lucide-react';
 import { getAllTrips, type TripConfig } from '@/lib/trips';
+import { forceScrollToTop } from '@/lib/scroll-utils';
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
@@ -11,6 +12,8 @@ export default function HomePage() {
 
   useEffect(() => {
     setMounted(true);
+    // Scroll to top when page loads
+    forceScrollToTop();
   }, []);
 
   if (!mounted) {

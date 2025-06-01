@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import { Sun, Waves, Palmtree, Calendar, Users, MapPin, TreePine, Building, Shell } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import Image from "next/image";
+import { forceScrollToTop } from '@/lib/scroll-utils';
 
 // Import trip data for previews
 import { itineraryData as oki25Data } from '@/lib/trips/oki25/itinerary';
@@ -37,6 +38,9 @@ export default function TripHomePage() {
       document.documentElement.style.setProperty('--trip-secondary', tripData.theme.secondary);
       document.documentElement.style.setProperty('--trip-accent', tripData.theme.accent);
     }
+    
+    // Scroll to top when page loads
+    forceScrollToTop();
   }, [tripId]);
 
   if (!trip) {
