@@ -34,7 +34,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="fixed inset-0 overflow-y-auto overflow-x-hidden overscroll-none">
+          <div id="app-scroll-container" className="fixed inset-0 overflow-y-auto overflow-x-hidden overscroll-none">
             {children}
           </div>
         </ThemeProvider>

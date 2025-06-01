@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Home, Ghost, TreePine, Fish, Building } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { forceScrollToTop } from "@/lib/scroll-utils";
 
 // Separate component that uses useSearchParams
 function ItineraryContent() {
@@ -19,15 +20,8 @@ function ItineraryContent() {
 
   // Scroll to top when day changes
   useEffect(() => {
-    // Find the scrollable container
-    const scrollableElement = document.getElementById('__next') || document.documentElement;
-    
-    // Small timeout to ensure content has rendered
-    const timer = setTimeout(() => {
-      scrollableElement.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 50);
-    
-    return () => clearTimeout(timer);
+    // Force scroll to top using utility
+    forceScrollToTop();
   }, [selectedDayId]); // Trigger when selectedDayId changes
 
   // Get trip-specific configuration
@@ -193,8 +187,10 @@ function ItineraryContent() {
               </Link>
               <button
                 onClick={() => {
-                  const scrollableElement = document.getElementById('__next') || document.documentElement;
-                  scrollableElement.scrollTo({ top: 0, behavior: 'smooth' });
+                  const scrollContainer = document.getElementById('app-scroll-container');
+                  if (scrollContainer) {
+                    scrollContainer.scrollTop = 0;
+                  }
                 }}
                 className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
               >
