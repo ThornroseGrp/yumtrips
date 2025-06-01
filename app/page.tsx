@@ -76,7 +76,7 @@ function TripCard({ trip, index }: { trip: TripConfig; index: number }) {
         {/* Cover Image */}
         <div className="relative h-64 md:h-72 overflow-hidden">
           <div
-            className={`absolute inset-0 bg-gradient-to-t ${trip.theme.gradient} opacity-40 z-10`}
+            className={`absolute inset-0 bg-gradient-to-t ${trip.theme?.gradient || 'from-gray-600 to-gray-800'} opacity-40 z-10`}
           />
           {trip.id === 'charleston25' && (
             <div className="absolute inset-0 rainbow-row-gradient opacity-20 z-20" />
