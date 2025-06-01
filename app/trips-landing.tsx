@@ -76,7 +76,7 @@ export default function TripsLandingPage() {
                   </div>
 
                   <div className="mt-6 flex items-center justify-between">
-                    <span className={`text-sm font-medium bg-gradient-to-r ${trip.theme.gradient} bg-clip-text text-transparent`}>
+                    <span className={`text-sm font-medium bg-gradient-to-r ${trip.theme?.gradient || 'from-blue-600 to-purple-600'} bg-clip-text text-transparent`}>
                       View Itinerary
                     </span>
                     <span className="text-gray-400 group-hover:translate-x-2 transition-transform">
