@@ -26,8 +26,9 @@ Yumtrips is a custom-built Progressive Web App platform designed for creating be
 
 ### 🌊 Beach 'n Boil - Outer Banks Adventure
 **June 6-8, 2025** | Oak Island, NC
-- Smith family beach vacation with seafood boil and Nana's memorial
+- Beach vacation with seafood boil and Nana's memorial
 - Ocean-themed design with cyan and blue colors
+- Rainbow gradient title styling
 - Path: `trips.yumrovia.com/oki25`
 
 ### 🌳 Charleston to Oak Island Adventure
@@ -174,6 +175,13 @@ yumtrips/
 - **Organization**: Store in `/public/photos/[tripId]/`
 
 ## 💡 Recent Updates (June 2025)
+
+### Scrolling Fix & UI Improvements (June 1, 2025)
+- **Fixed Infinite Scroll Issue**: Implemented viewport container approach to prevent scrolling above navigation
+- **Rainbow Gradient Title**: Beach 'n Boil now displays with cyan-blue "Beach" and orange-yellow "Boil"
+- **Removed Family References**: Made content more generic for broader appeal
+- **Cover Photos**: Day cards now display themed cover photos (cover-day-1/2/3.webp) at 30% opacity
+- **Improved Navigation**: Sticky navigation now works properly without white space issues
 
 ### Multi-Trip Platform Conversion
 - Transformed from single Beach 'n Boil app to Yumtrips platform

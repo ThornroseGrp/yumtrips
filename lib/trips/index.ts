@@ -24,7 +24,7 @@ export const trips: Record<string, TripConfig> = {
     id: 'oki25',
     name: "Beach 'n Boil - Outer Banks Adventure",
     shortName: "OKI '25",
-    description: "Smith family beach vacation with seafood boil and Nana's memorial",
+    description: "Beach vacation with seafood boil and Nana's memorial",
     dates: "June 6-8, 2025",
     location: "Oak Island, NC",
     themeId: 'ocean', // Using new theme system
