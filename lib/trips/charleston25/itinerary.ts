@@ -149,7 +149,7 @@ export const charleston25Itinerary: Day[] = [
         title: "Evening at Andell Inn",
         description: "Return to the inn for porch rockers or a lakefront stroll. Early lights-out tonight—we have a full Charleston day tomorrow!",
         type: "activity",
-        photos: ["charleston25/andell-inn-patio.webp", "charleston25/andell-inn-pool.webp"],
+        photos: ["charleston25/andell-inn-1.webp", "charleston25/andell-inn-pool.webp"],
         highlights: ["Porch swings", "Lakefront views", "Sweet dreams"],
         notes: ["Lobby has complimentary cookies until 9pm"]
       }

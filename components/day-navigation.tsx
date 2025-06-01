@@ -15,12 +15,14 @@ export function DayNavigation({ tripId }: DayNavigationProps) {
   const goToPrevious = () => {
     if (currentIndex > 0) {
       setSelectedDayId(days[currentIndex - 1].id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const goToNext = () => {
     if (currentIndex < days.length - 1) {
       setSelectedDayId(days[currentIndex + 1].id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -84,7 +86,10 @@ export function DayNavigation({ tripId }: DayNavigationProps) {
             {days.map((day) => (
               <button
                 key={day.id}
-                onClick={() => setSelectedDayId(day.id)}
+                onClick={() => {
+                  setSelectedDayId(day.id);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all",
                   day.id === selectedDayId
