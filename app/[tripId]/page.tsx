@@ -190,14 +190,9 @@ export default function TripHomePage() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {itinerary.map((day, index) => {
-            // Find first photo in the day's activities
-            let backgroundPhoto = null;
-            for (const activity of day.activities) {
-              if (activity.photos && activity.photos.length > 0) {
-                backgroundPhoto = activity.photos[0];
-                break;
-              }
-            }
+            // Use specific cover photo for each day
+            const coverPhotoName = `cover-day-${index + 1}.webp`;
+            const backgroundPhoto = `photos/${tripId}/${coverPhotoName}`
             
             return (
               <div

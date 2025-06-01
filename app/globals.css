@@ -7,11 +7,14 @@
 
 @layer base {
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth overflow-x-hidden;
+    height: 100%;
   }
   
   body {
     @apply antialiased overflow-x-hidden;
+    min-height: 100%;
+    position: relative;
   }
 }
 
