@@ -117,11 +117,11 @@ export default function TripHomePage() {
                 ? 'from-cyan-500 to-blue-600'
                 : 'from-violet-600 to-rose-500'
             } bg-clip-text text-transparent`}>
-              {trip.shortName}
+              {trip.name}
             </span>
           </h1>
           <p className="text-2xl md:text-3xl text-gray-700 dark:text-gray-200 mb-2">
-            {trip.name}
+            {trip.description}
           </p>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
             {trip.dates} • {trip.location}

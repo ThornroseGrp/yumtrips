@@ -358,7 +358,7 @@ export const charleston25Itinerary: Day[] = [
     id: "friday",
     date: "2025-06-06",
     title: "Fried-Chicken, Sandpipers & Sunset Scoops",
-    attendees: ["Lady Jae", "Nikki", "Shawn", "Kyle", "Yury", "Andrew", "Leo"],
+    attendees: ["Lady Jae", "Nikki", "Shawn"],
     hype: "🍗 Charleston's King Street calls with Leon's world-famous fried chicken—crispy, juicy, and worth the hype. Then we head north to unite with the cousins at Oak Island!",
     quickFacts: [
       "11am doors at Leon's Oyster Shop (fried chicken + oysters)",

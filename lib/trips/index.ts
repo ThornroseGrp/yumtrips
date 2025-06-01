@@ -36,8 +36,8 @@ export const trips: Record<string, TripConfig> = {
   },
   'charleston25': {
     id: 'charleston25',
-    name: "Charleston to Oak Island Adventure",
-    shortName: "Charleston '25",
+    name: "Trees 'n Seas",
+    shortName: "Trees 'n Seas",
     description: "Forest cathedrals, raw bars, ghost tours & beach reunion",
     dates: "June 4-6, 2025",
     location: "Mooresville → Charleston → Oak Island",
@@ -48,7 +48,7 @@ export const trips: Record<string, TripConfig> = {
       gradient: "from-violet-600 to-rose-500"
     },
     coverPhoto: "/photos/charleston25/rainbow-row-1.webp",
-    icon: "🌈"
+    icon: "🌳"
   }
 };
 
