@@ -6,8 +6,12 @@
 @import './theme-styles.css';
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
   body {
-    @apply antialiased;
+    @apply antialiased overflow-x-hidden;
   }
 }
 

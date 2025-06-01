@@ -73,7 +73,7 @@ export default function TripHomePage() {
       </div>
 
       {/* Hero Section */}
-      <div className="relative h-screen flex items-center justify-center overflow-hidden">
+      <div className="relative flex items-center justify-center overflow-hidden" style={{ height: '100vh' }}>
         {/* Animated Background */}
         <div className="absolute inset-0">
           <div className={`absolute inset-0 bg-gradient-to-br ${
@@ -158,7 +158,7 @@ export default function TripHomePage() {
       </div>
 
       {/* Cover Photo Card */}
-      <div className="max-w-4xl mx-auto px-4 -mt-20 relative z-20 mb-16">
+      <div className="relative z-20 -mt-20 mb-16 mx-auto max-w-4xl px-4">
         <div className={`rounded-2xl shadow-2xl overflow-hidden ${
           tripId === 'oki25'
             ? 'bg-white dark:bg-ocean-night-100'
@@ -189,68 +189,87 @@ export default function TripHomePage() {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {itinerary.map((day, index) => (
-            <div
-              key={day.id}
-              onClick={() => router.push(`/${tripId}/itinerary?day=${day.id}`)}
-              className="group cursor-pointer"
-            >
-              <div className={`rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl ${
-                tripId === 'oki25'
-                  ? 'bg-white dark:bg-ocean-night-100'
-                  : 'bg-white dark:bg-violet-950/50 charleston-shadow'
-              }`}>
-                {/* Day Image */}
-                <div className={`relative h-48 bg-gradient-to-br ${
+          {itinerary.map((day, index) => {
+            // Find first photo in the day's activities
+            let backgroundPhoto = null;
+            for (const activity of day.activities) {
+              if (activity.photos && activity.photos.length > 0) {
+                backgroundPhoto = activity.photos[0];
+                break;
+              }
+            }
+            
+            return (
+              <div
+                key={day.id}
+                onClick={() => router.push(`/${tripId}/itinerary?day=${day.id}`)}
+                className="group cursor-pointer"
+              >
+                <div className={`rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl ${
                   tripId === 'oki25'
-                    ? 'from-cyan-400 to-blue-500 dark:from-ocean-dark dark:to-ocean-900'
-                    : 'from-violet-500 to-rose-500 dark:from-violet-800 dark:to-rose-800'
+                    ? 'bg-white dark:bg-ocean-night-100'
+                    : 'bg-white dark:bg-violet-950/50 charleston-shadow'
                 }`}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white/20 text-8xl font-bold">
-                      {index + 1}
-                    </span>
+                  {/* Day Image with Background Photo */}
+                  <div className={`relative h-48 overflow-hidden bg-gradient-to-br ${
+                    tripId === 'oki25'
+                      ? 'from-cyan-400 to-blue-500 dark:from-ocean-dark dark:to-ocean-900'
+                      : 'from-violet-500 to-rose-500 dark:from-violet-800 dark:to-rose-800'
+                  }`}>
+                    {/* Background photo */}
+                    {backgroundPhoto && (
+                      <img
+                        src={`/${backgroundPhoto}`}
+                        alt={day.title}
+                        className="absolute inset-0 w-full h-full object-cover opacity-30"
+                      />
+                    )}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-white/20 text-8xl font-bold">
+                        {index + 1}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-4 left-4">
+                      <p className="text-white/80 text-sm">Day {index + 1}</p>
+                      <h3 className="text-white text-2xl font-bold">{day.title}</h3>
+                    </div>
                   </div>
-                  <div className="absolute bottom-4 left-4">
-                    <p className="text-white/80 text-sm">Day {index + 1}</p>
-                    <h3 className="text-white text-2xl font-bold">{day.title}</h3>
-                  </div>
-                </div>
 
-                {/* Content */}
-                <div className="p-6">
-                  <div className="flex items-center text-gray-600 dark:text-gray-300 mb-3">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    <span className="text-sm">
-                      {new Date(day.date).toLocaleDateString("en-US", {
-                        weekday: "long",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </span>
-                  </div>
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="flex items-center text-gray-600 dark:text-gray-300 mb-3">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      <span className="text-sm">
+                        {new Date(day.date).toLocaleDateString("en-US", {
+                          weekday: "long",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </div>
 
-                  <p className="text-gray-700 dark:text-gray-200 text-sm leading-relaxed mb-4">
-                    {day.hype}
-                  </p>
+                    <p className="text-gray-700 dark:text-gray-200 text-sm leading-relaxed mb-4">
+                      {day.hype}
+                    </p>
 
-                  {/* Activity Count */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500 dark:text-gray-300">
-                      {day.activities.length} activities
-                    </span>
-                    <span className={`group-hover:translate-x-2 transition-transform ${
-                      tripId === 'oki25'
-                        ? 'text-cyan-600 dark:text-cyan-400'
-                        : 'text-violet-600 dark:text-violet-400'
-                    }`}>
-                      →
-                    </span>
+                    {/* Activity Count */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-500 dark:text-gray-300">
+                        {day.activities.length} activities
+                      </span>
+                      <span className={`group-hover:translate-x-2 transition-transform ${
+                        tripId === 'oki25'
+                          ? 'text-cyan-600 dark:text-cyan-400'
+                          : 'text-violet-600 dark:text-violet-400'
+                      }`}>
+                        →
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -260,7 +279,7 @@ export default function TripHomePage() {
           ? 'bg-gradient-to-b from-white to-cyan-50 dark:from-ocean-night-50 dark:to-ocean-night-100'
           : 'bg-gradient-to-b from-white to-violet-50 dark:from-slate-950 dark:to-violet-950/30'
       }`}>
-        <div className="max-w-4xl mx-auto px-4 text-center">
+        <div className="max-w-4xl mx-auto px-4 text-center pb-8">
           <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-50 mb-8">
             Everything You Need for the Perfect Trip
           </h3>

@@ -1,5 +1,20 @@
-// Theme system for Yumtrips
+// Theme system for Yumtrips - Using Lucide React Icons
 // Each theme transforms the entire visual experience to match the destination
+import { type LucideIcon } from 'lucide-react';
+import { 
+  Waves, Sun, Palmtree, Shell, Sailboat,
+  Fish, Umbrella, Car, Home,
+  Building2, TreePine, Ghost, Church, Landmark,
+  GlassWater, Building, MapPin,
+  Grape, Flower2, Wine, Hotel, Utensils,
+  Mountain, Trees, Tent, CableCar, Soup,
+  TreePalm, Bird, Flower, Coconut, Cocktail,
+  Ship, Bed,
+  Cactus, Sunset, Pyramid, Caravan, Taco,
+  Tent as CampTent,
+  Building as CityBuilding, Subway, Theater, Pizza, Palette,
+  Train, Hotel as CityHotel
+} from 'lucide-react';
 
 export interface ThemeConfig {
   id: string;
@@ -24,16 +39,16 @@ export interface ThemeConfig {
     textTransform?: 'none' | 'uppercase' | 'lowercase' | 'capitalize';
   };
   
-  // Icons & Emojis
+  // Icons - Now using Lucide React components
   icons: {
-    primary: string; // Main emoji/icon for the theme
-    secondary: string[]; // Supporting icons
-    bulletPoint: string; // For lists
+    primary: LucideIcon; // Main icon for the theme
+    secondary: LucideIcon[]; // Supporting icons
+    bulletPoint?: LucideIcon; // For lists (optional, can still use emoji)
     activities: {
-      food: string;
-      activity: string;
-      travel: string;
-      accommodation: string;
+      food: LucideIcon;
+      activity: LucideIcon;
+      travel: LucideIcon;
+      accommodation: LucideIcon;
     };
   };
   
@@ -89,14 +104,13 @@ export const themes: Record<string, ThemeConfig> = {
       textTransform: 'none'
     },
     icons: {
-      primary: '🌊',
-      secondary: ['🏖️', '🌅', '🐚', '🏄‍♂️'],
-      bulletPoint: '🌊',
+      primary: Waves,
+      secondary: [Sun, Palmtree, Shell, Sailboat],
       activities: {
-        food: '🦐',
-        activity: '🏖️',
-        travel: '🚗',
-        accommodation: '🏠'
+        food: Fish,
+        activity: Umbrella,
+        travel: Car,
+        accommodation: Home
       }
     },
     effects: {
@@ -141,14 +155,13 @@ export const themes: Record<string, ThemeConfig> = {
       textTransform: 'none'
     },
     icons: {
-      primary: '🌳',
-      secondary: ['🏛️', '👻', '🦐', '🌸'],
-      bulletPoint: '🌳',
+      primary: TreePine,
+      secondary: [Building2, Ghost, Church, Landmark],
       activities: {
-        food: '🦪',
-        activity: '🏛️',
-        travel: '🚗',
-        accommodation: '🏨'
+        food: GlassWater,
+        activity: Building,
+        travel: Car,
+        accommodation: Hotel
       }
     },
     effects: {
@@ -192,14 +205,13 @@ export const themes: Record<string, ThemeConfig> = {
       textTransform: 'none'
     },
     icons: {
-      primary: '🌻',
-      secondary: ['🍇', '🫒', '🍷', '🏺'],
-      bulletPoint: '🫒',
+      primary: Grape,
+      secondary: [Flower2, Wine, Sun],
       activities: {
-        food: '🍝',
-        activity: '🏛️',
-        travel: '🛵',
-        accommodation: '🏡'
+        food: Utensils,
+        activity: Landmark,
+        travel: Car,
+        accommodation: Hotel
       }
     },
     effects: {
@@ -242,14 +254,13 @@ export const themes: Record<string, ThemeConfig> = {
       textTransform: 'uppercase'
     },
     icons: {
-      primary: '🏔️',
-      secondary: ['🌲', '⛷️', '🦌', '🏕️'],
-      bulletPoint: '🌲',
+      primary: Mountain,
+      secondary: [Trees, TreePine, Tent],
       activities: {
-        food: '🫕',
-        activity: '⛷️',
-        travel: '🚡',
-        accommodation: '🛖'
+        food: Soup,
+        activity: Mountain,
+        travel: CableCar,
+        accommodation: Tent
       }
     },
     effects: {
@@ -293,14 +304,13 @@ export const themes: Record<string, ThemeConfig> = {
       textTransform: 'none'
     },
     icons: {
-      primary: '🌴',
-      secondary: ['🦜', '🌺', '🥥', '🍹'],
-      bulletPoint: '🌺',
+      primary: TreePalm,
+      secondary: [Bird, Flower, Sun],
       activities: {
-        food: '🍹',
-        activity: '🏄',
-        travel: '🛶',
-        accommodation: '🏝️'
+        food: Cocktail,
+        activity: Umbrella,
+        travel: Ship,
+        accommodation: Bed
       }
     },
     effects: {
@@ -343,14 +353,13 @@ export const themes: Record<string, ThemeConfig> = {
       textTransform: 'none'
     },
     icons: {
-      primary: '🌵',
-      secondary: ['🦎', '☀️', '🏜️', '🦅'],
-      bulletPoint: '🌵',
+      primary: Cactus,
+      secondary: [Sunset, Sun, Pyramid],
       activities: {
-        food: '🌮',
-        activity: '🏜️',
-        travel: '🚙',
-        accommodation: '🏕️'
+        food: Utensils, // Would be Taco if we had it
+        activity: Pyramid,
+        travel: Caravan,
+        accommodation: CampTent
       }
     },
     effects: {
@@ -394,14 +403,13 @@ export const themes: Record<string, ThemeConfig> = {
       textTransform: 'uppercase'
     },
     icons: {
-      primary: '🏙️',
-      secondary: ['🚇', '🎭', '🍕', '🎨'],
-      bulletPoint: '▪️',
+      primary: CityBuilding,
+      secondary: [Subway, Theater, Palette],
       activities: {
-        food: '🍕',
-        activity: '🎭',
-        travel: '🚇',
-        accommodation: '🏨'
+        food: Pizza,
+        activity: Theater,
+        travel: Subway,
+        accommodation: CityHotel
       }
     },
     effects: {

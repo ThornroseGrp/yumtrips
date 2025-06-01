@@ -86,8 +86,8 @@ export const ThemedActivityCard = memo(function ThemedActivityCard({
   // Get activity icon from theme
   const getActivityIcon = () => {
     if (!theme) return null;
-    const iconEmoji = theme.icons.activities[activity.type];
-    return <span className="text-base">{iconEmoji}</span>;
+    const IconComponent = theme.icons.activities[activity.type];
+    return <IconComponent className="w-4 h-4" />;
   };
 
   // Get theme-specific styles
@@ -263,7 +263,7 @@ export const ThemedActivityCard = memo(function ThemedActivityCard({
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <span className={cn(
-                    "p-1 rounded-lg",
+                    "p-1 rounded-lg flex items-center justify-center",
                     activity.type === "food" && "bg-orange-100 text-orange-600",
                     activity.type === "activity" && "bg-cyan-100 text-cyan-600",
                     activity.type === "travel" && "bg-blue-100 text-blue-600",
@@ -381,7 +381,7 @@ export const ThemedActivityCard = memo(function ThemedActivityCard({
                     <ul className="space-y-1">
                       {activity.notes.map((note, index) => (
                         <li key={index} className="text-sm text-blue-800 dark:text-blue-200">
-                          {theme?.icons.bulletPoint} {note}
+                          {note}
                         </li>
                       ))}
                     </ul>

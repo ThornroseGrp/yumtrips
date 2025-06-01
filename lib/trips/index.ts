@@ -35,7 +35,7 @@ export const trips: Record<string, TripConfig> = {
       gradient: "from-cyan-500 to-blue-600"
     },
     coverPhoto: "/photos/oki25/cover-family.webp",
-    icon: "🌊"
+    icon: "🌊" // For backward compatibility
   },
   'charleston25': {
     id: 'charleston25',
@@ -52,7 +52,7 @@ export const trips: Record<string, TripConfig> = {
       gradient: "from-violet-600 to-rose-500"
     },
     coverPhoto: "/photos/charleston25/rainbow-row-1.webp",
-    icon: "🌳"
+    icon: "🌳" // For backward compatibility
   }
 };
 

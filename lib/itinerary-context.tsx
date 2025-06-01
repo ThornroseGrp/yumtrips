@@ -35,9 +35,9 @@ export function useItinerary() {
 }
 
 export function ItineraryProvider({ children, tripId }: { children: React.ReactNode; tripId: string }) {
-  const [selectedDayId, setSelectedDayId] = useState<string>("friday");
-  const [currentActivity, setCurrentActivity] = useState<Activity | null>(null);
   const [itineraryData, setItineraryData] = useState<Day[]>([]);
+  const [selectedDayId, setSelectedDayId] = useState<string>("");
+  const [currentActivity, setCurrentActivity] = useState<Activity | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [theme, setTheme] = useState<ThemeConfig | null>(null);
 
@@ -60,7 +60,21 @@ export function ItineraryProvider({ children, tripId }: { children: React.ReactN
         const loader = tripItineraries[tripId];
         if (loader) {
           const module = await loader();
-          setItineraryData(module.default);
+          const days = module.default;
+          setItineraryData(days);
+          
+          // Set initial selected day based on current date or first day
+          if (days.length > 0) {
+            const today = format(new Date(), 'yyyy-MM-dd');
+            const todayDay = days.find(day => day.date === today);
+            
+            if (todayDay) {
+              setSelectedDayId(todayDay.id);
+            } else {
+              // Default to first day of trip
+              setSelectedDayId(days[0].id);
+            }
+          }
         }
       } catch (error) {
         console.error('Failed to load itinerary:', error);

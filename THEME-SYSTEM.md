@@ -22,11 +22,11 @@ Each theme contains the following elements:
 - `decorativeFont`: Special font for decorative elements
 - `textTransform`: Text transformation (uppercase, lowercase, capitalize, none)
 
-### 3. **Icons & Emojis**
-- `primary`: Main emoji/icon representing the theme
-- `secondary`: Array of supporting icons
-- `bulletPoint`: Icon used for list items
-- `activities`: Activity-specific icons (food, activity, travel, accommodation)
+### 3. **Icons - Lucide React**
+- `primary`: Main Lucide icon component representing the theme
+- `secondary`: Array of supporting Lucide icons
+- `bulletPoint`: Optional icon for list items
+- `activities`: Activity-specific Lucide icons (food, activity, travel, accommodation)
 
 ### 4. **Visual Effects**
 - `animations`: CSS animation classes (wave, float, gentle-sway, etc.)
@@ -59,49 +59,49 @@ Perfect for beach destinations, coastal trips, and water activities.
 - **Colors**: Cyan, blue, and orange
 - **Effects**: Wave animations, sand textures
 - **Photos**: Polaroid frames with bright, saturated colors
-- **Icons**: 🌊 🏖️ 🌅 🐚 🏄‍♂️
+- **Icons**: Waves, Sun, Palmtree, Shell, Sailboat (Lucide React components)
 
 ### 🏛️ Charleston (Historic City) Theme
 Ideal for historic cities, cultural destinations, and heritage sites.
 - **Colors**: Violet, rose, and teal
 - **Effects**: Rainbow gradient, cobblestone textures, tree canopy
 - **Photos**: Vintage frames with slight sepia tone
-- **Icons**: 🌳 🏛️ 👻 🦐 🌸
+- **Icons**: TreePine, Building2, Ghost, Church, Landmark (Lucide React components)
 
 ### 🌻 Tuscany Theme
 For wine country, rural escapes, and Mediterranean destinations.
 - **Colors**: Amber, stone, and olive
 - **Effects**: Gentle sway, tuscan plaster, vineyard patterns
 - **Photos**: Rustic frames with warm filters
-- **Icons**: 🌻 🍇 🫒 🍷 🏺
+- **Icons**: Grape, Flower2, Wine, Sun (Lucide React components)
 
 ### 🏔️ Alpine Theme
 Mountain destinations, ski resorts, and wilderness adventures.
 - **Colors**: Emerald, slate, and sky
 - **Effects**: Snow fall, pine sway, wood grain textures
 - **Photos**: Modern frames with high contrast
-- **Icons**: 🏔️ 🌲 ⛷️ 🦌 🏕️
+- **Icons**: Mountain, Trees, TreePine, Tent (Lucide React components)
 
 ### 🌴 Tropical Paradise Theme
 Island getaways, tropical destinations, and exotic locations.
 - **Colors**: Lime, pink, and turquoise
 - **Effects**: Palm sway, tropical breeze, bamboo textures
 - **Photos**: No frames, rounded corners, vibrant saturation
-- **Icons**: 🌴 🦜 🌺 🥥 🍹
+- **Icons**: TreePalm, Bird, Flower, Sun (Lucide React components)
 
 ### 🌵 Desert Theme
 Southwest adventures, canyon trips, and arid landscapes.
 - **Colors**: Orange, red, and turquoise
 - **Effects**: Heat shimmer, tumble weed, adobe textures
 - **Photos**: Rustic frames with warm contrast
-- **Icons**: 🌵 🦎 ☀️ 🏜️ 🦅
+- **Icons**: Cactus, Sunset, Sun, Pyramid (Lucide React components)
 
 ### 🏙️ Urban Theme
 City breaks, metropolitan adventures, and cultural city tours.
 - **Colors**: Zinc, violet, and yellow
 - **Effects**: Neon flicker, city pulse, concrete textures
 - **Photos**: Modern frames with urban filters
-- **Icons**: 🏙️ 🚇 🎭 🍕 🎨
+- **Icons**: Building, Subway, Theater, Palette (Lucide React components)
 
 ## Implementation
 
@@ -123,6 +123,8 @@ export const trips: Record<string, TripConfig> = {
 
 ```typescript
 // In lib/theme-system.ts
+import { Waves, TreePine, Mountain, Utensils, Car, Hotel } from 'lucide-react';
+
 export const themes: Record<string, ThemeConfig> = {
   // ... existing themes
   
@@ -141,14 +143,13 @@ export const themes: Record<string, ThemeConfig> = {
       textTransform: 'none'
     },
     icons: {
-      primary: '✨',
-      secondary: ['🎨', '🎭', '🎪', '🎯'],
-      bulletPoint: '•',
+      primary: Mountain, // Lucide React icon
+      secondary: [TreePine, Waves], // Array of Lucide icons
       activities: {
-        food: '🍽️',
-        activity: '🎯',
-        travel: '✈️',
-        accommodation: '🏨'
+        food: Utensils,
+        activity: Mountain,
+        travel: Car,
+        accommodation: Hotel
       }
     },
     // ... continue with effects, photo styles, etc.
@@ -194,7 +195,10 @@ const { theme } = useItinerary();
 
 // Use theme properties
 const primaryColor = theme?.colors.primary || 'cyan';
-const activityIcon = theme?.icons.activities.food || '🍽️';
+const ActivityIcon = theme?.icons.activities.food || Utensils;
+
+// Render icon
+<ActivityIcon className="w-4 h-4" />
 ```
 
 ## Best Practices
@@ -203,8 +207,9 @@ const activityIcon = theme?.icons.activities.food || '🍽️';
 2. **Animations**: Keep animations subtle and performant
 3. **Textures**: Use low-opacity patterns to maintain readability
 4. **Photos**: Ensure filters don't obscure important details
-5. **Icons**: Choose emojis that render well across platforms
+5. **Icons**: Use Lucide React components that are included in the project
 6. **Accessibility**: Maintain proper contrast ratios in all themes
+7. **Performance**: Icons render as SVGs for crisp display at any size
 
 ## Future Enhancements
 

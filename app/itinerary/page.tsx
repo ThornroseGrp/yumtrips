@@ -148,10 +148,49 @@ function ItineraryContent() {
             </div>
           )}
         </div>
-        
-        {/* Bottom spacing for mobile */}
-        <div className="h-20" />
       </main>
+      
+      {/* Footer */}
+      <footer className={`mt-16 border-t ${tripConfig.borderColor} bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm`}>
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">{tripConfig.icon}</span>
+              <div>
+                <p className={`font-semibold bg-gradient-to-r ${tripConfig.textGradient} bg-clip-text text-transparent`}>
+                  {tripConfig.name}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {tripConfig.tagline}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link 
+                href={`/${tripId}`}
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+              >
+                Trip Home
+              </Link>
+              <Link 
+                href="/"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+              >
+                All Trips
+              </Link>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+              >
+                Back to Top ↑
+              </button>
+            </div>
+          </div>
+          <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-500">
+            Made with ❤️ for amazing family adventures
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

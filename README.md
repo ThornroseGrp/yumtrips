@@ -52,7 +52,7 @@ Yumtrips features a comprehensive theme system that transforms the entire visual
 
 ### Theme Features
 - Dynamic color schemes and gradients
-- Destination-specific icons and emojis
+- Destination-specific Lucide React icons
 - Custom animations and visual effects
 - Themed photo frames and filters
 - Texture overlays and patterns
@@ -207,7 +207,7 @@ yumtrips/
 - **Theme Elements**:
   - Dynamic color systems with primary, secondary, and accent colors
   - Typography options (serif, sans-serif, decorative fonts)
-  - Destination-specific icons and activity emojis
+  - Destination-specific Lucide React icons for activities
   - Visual effects (animations, textures, patterns, shadows)
   - Photo display styles (polaroid, vintage, rustic, modern frames)
   - Interactive elements (hover effects, transitions)

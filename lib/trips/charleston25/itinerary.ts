@@ -149,7 +149,7 @@ export const charleston25Itinerary: Day[] = [
         title: "Evening at Andell Inn",
         description: "Return to the inn for porch rockers or a lakefront stroll. Early lights-out tonight—we have a full Charleston day tomorrow!",
         type: "activity",
-        photos: ["charleston25/andell-inn-patio.webp"],
+        photos: ["charleston25/andell-inn-patio.webp", "charleston25/andell-inn-pool.webp"],
         highlights: ["Porch swings", "Lakefront views", "Sweet dreams"],
         notes: ["Lobby has complimentary cookies until 9pm"]
       }
@@ -458,7 +458,7 @@ export const charleston25Itinerary: Day[] = [
         title: "Sandpiper Pond Trail",
         description: "Stretch your legs on this beautiful 2-mile boardwalk loop through salt marsh. Look for herons, sandpipers, and maybe even alligators! Flat and stroller-friendly.",
         type: "activity",
-        photos: ["charleston25/huntington-beach-1.webp"],
+        photos: ["charleston25/sandpiper-pond-trail-1.webp", "charleston25/sandpiper-pond-trail-2.webp", "charleston25/sandpiper-pond-trail-3.webp"],
         mapUrl: "https://maps.app.goo.gl/XaZseTcBXJoBriz77",
         highlights: ["2-mile boardwalk", "Wildlife viewing", "Marsh ecosystem"],
         notes: [
@@ -495,7 +495,7 @@ export const charleston25Itinerary: Day[] = [
         title: "Scenic Marsh Walkway",
         description: "Take a quick family stroll on the boardwalk behind the house (9th St). Perfect for a group photo with egrets in the background!",
         type: "activity",
-        photos: ["charleston25/oak-island-marsh-1.webp", "charleston25/oak-island-marsh-2.webp"],
+        photos: ["charleston25/scenic-marsh-walkway-1.webp", "charleston25/scenic-marsh-walkway-2.webp"],
         mapUrl: "https://maps.app.goo.gl/StLcohZQ1FkJGZU8A",
         highlights: ["Boardwalk stroll", "Egret watching", "Sunset views"],
         notes: ["5-minute walk", "Great first group photo spot"]
@@ -524,7 +524,7 @@ export const charleston25Itinerary: Day[] = [
         title: "Oak Island Lighthouse (Optional)",
         description: "Quick drive to the lighthouse for dusk photos. Grounds are open, but interior tours are Saturday 10am-12pm only.",
         type: "activity",
-        photos: ["charleston25/oak-island-lighthouse-1.webp"],
+        photos: ["charleston25/lighthouse-1.webp", "charleston25/oak-island-lighthouse-1.webp", "charleston25/oak-island-lighthouse-2.webp"],
         mapUrl: "https://maps.app.goo.gl/rn7G7eSseQdPiarg6",
         highlights: ["Lighthouse photos", "Sunset views", "Quick stop"],
         notes: ["2.5 miles, 8-min drive", "Signboard history", "Interior tours Saturday AM only"]
@@ -536,7 +536,7 @@ export const charleston25Itinerary: Day[] = [
         description: "End the night with homemade ice cream! Try the butter-pecan or birthday-cake swirl. Open until 10pm.",
         type: "food",
         location: "6324 E Oak Island Dr",
-        photos: ["charleston25/sweetreat-menu-1.webp", "charleston25/sweetreat-menu-2.webp"],
+        photos: ["charleston25/sweet-treats-1.webp", "charleston25/sweet-treats-2.webp", "charleston25/sweet-treats-3.webp"],
         mapUrl: "https://maps.app.goo.gl/jM3R7dxUWGxEvvYs7",
         highlights: ["Homemade ice cream", "Butter pecan", "Birthday cake swirl"],
         notes: [
@@ -551,7 +551,7 @@ export const charleston25Itinerary: Day[] = [
         title: "Evening Wind Down",
         description: "Kids wind down while adults prep cameras for tomorrow's sunrise at 6:01am. The path to beach is just a 5-minute walk from the house!",
         type: "activity",
-        photos: ["charleston25/oak-island-beach-1.webp", "charleston25/oak-island-beach-2.webp"],
+        photos: ["charleston25/beach-sunset-1.webp", "charleston25/beach-sunset-2.webp", "charleston25/beach-1.webp"],
         highlights: ["Beach sunset", "Family time", "Rest up"],
         notes: ["Set alarms for 6:01am sunrise!", "Beach access right at 16th Pl E"]
       }
