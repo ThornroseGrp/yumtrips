@@ -14,8 +14,21 @@ import { ThemeToggle } from "@/components/theme-toggle";
 // Separate component that uses useSearchParams
 function ItineraryContent() {
   const searchParams = useSearchParams();
-  const { currentDay, setSelectedDayId, tripId } = useItinerary();
+  const { currentDay, setSelectedDayId, tripId, selectedDayId } = useItinerary();
   const [isTimelineView, setIsTimelineView] = useState(false);
+
+  // Scroll to top when day changes
+  useEffect(() => {
+    // Find the scrollable container
+    const scrollableElement = document.getElementById('__next') || document.documentElement;
+    
+    // Small timeout to ensure content has rendered
+    const timer = setTimeout(() => {
+      scrollableElement.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 50);
+    
+    return () => clearTimeout(timer);
+  }, [selectedDayId]); // Trigger when selectedDayId changes
 
   // Get trip-specific configuration
   const getTripConfig = () => {
@@ -179,7 +192,10 @@ function ItineraryContent() {
                 All Trips
               </Link>
               <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                onClick={() => {
+                  const scrollableElement = document.getElementById('__next') || document.documentElement;
+                  scrollableElement.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
               >
                 Back to Top ↑
